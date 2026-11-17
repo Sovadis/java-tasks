@@ -1,0 +1,41 @@
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    group = 'ua.kpi.java'
+    version = '1.0'
+
+    repositories {
+        mavenCentral()
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    dependencies {
+        testImplementation platform('org.junit:junit-bom:5.11.4')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    test {
+        useJUnitPlatform()
+        systemProperty 'file.encoding', 'UTF-8'
+        testLogging {
+            events 'passed', 'skipped', 'failed'
+        }
+    }
+
+    // Консольні програми читають з клавіатури і пишуть українською.
+    run {
+        standardInput = System.in
+        jvmArgs '-Dstdout.encoding=UTF-8', '-Dstderr.encoding=UTF-8'
+    }
+}
