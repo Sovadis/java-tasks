@@ -1,0 +1,10 @@
+application {
+    mainClass = 'ua.kpi.java.task2.Main'
+}
+
+dependencies {
+    // Gson — серіалізація/десеріалізація об'єктів у JSON.
+    implementation 'com.google.code.gson:gson:2.15.0'
+    // EqualsVerifier — перевірка контракту equals/hashCode у тестах.
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.19.4'
+}
