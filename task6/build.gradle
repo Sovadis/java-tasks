@@ -1,0 +1,3 @@
+application {
+    mainClass = 'ua.kpi.java.task6.Main'
+}
