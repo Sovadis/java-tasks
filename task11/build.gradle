@@ -1,0 +1,20 @@
+application {
+    mainClass = 'ua.kpi.java.task11.Main'
+}
+
+dependencies {
+    // Вбудована СУБД H2: JDBC-драйвер і веб-консоль адміністрування в одному jar.
+    // Для MySQL замість неї: runtimeOnly 'com.mysql:mysql-connector-j:<версія>'.
+    implementation 'com.h2database:h2:2.5.252'
+}
+
+// Веб-консоль H2 (інструмент адміністрування БД): ./gradlew :task11:h2Console, далі http://localhost:8082.
+// Робоча папка — task11, тому відносний URL jdbc:h2:./data/company вказує на ту саму базу, що й програма.
+tasks.register('h2Console', JavaExec) {
+    group = 'application'
+    description = 'Запускає веб-консоль H2 для бази даних роботи 11'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'org.h2.tools.Server'
+    args '-web', '-webPort', '8082'
+    workingDir = projectDir
+}
