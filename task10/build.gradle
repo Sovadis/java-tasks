@@ -1,0 +1,18 @@
+// Рефлексія змінює приватні поля java.lang.String. Починаючи з JDK 16 пакет java.lang закритий для
+// рефлексії ззовні модуля java.base, тому його треба явно відкрити для коду з classpath (ALL-UNNAMED).
+def openJavaLang = ['--add-opens', 'java.base/java.lang=ALL-UNNAMED']
+
+application {
+    mainClass = 'ua.kpi.java.task10.Main'
+    // для скриптів запуску (gradlew installDist / distZip)
+    applicationDefaultJvmArgs = openJavaLang
+}
+
+// кореневий build.gradle задає jvmArgs задачі run явно, тому applicationDefaultJvmArgs до неї не доходять
+run {
+    jvmArgs openJavaLang
+}
+
+test {
+    jvmArgs openJavaLang
+}
